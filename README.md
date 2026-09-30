@@ -1,27 +1,36 @@
-# Match Mode 1.1.1
+# Match Mode 1.1.0
 
-Forge-мод для Minecraft **1.20.1**.
+Forge 1.20.1 server-side mod for match mode with presets, shrinking border, kill-cam.
 
-## Изменения в 1.1.1
-- При смерти **сразу spectator** — меню смерти не показывается
-- На экране появляется title **«ты 200»**
-- Килл-камера и остальная логика матча сохранены
+## Build
 
-## Сборка
-
-Требования: **JDK 17**
+**Requirements:** JDK 17+, ~4 GB RAM
 
 ```bash
+chmod +x gradlew
 ./gradlew build
 ```
 
-Готовый jar: `build/libs/matchmode-1.1.1.jar`
+JAR: `build/libs/matchmode-1.1.0.jar` → put in server `mods/`
 
-## Команды
-- `/match ready` — готовность к матчу
-- `/match stop` — остановить матч (op)
-- `/match center` — центр зоны (op)
-- `/match size <start> <end> <seconds>` — размер барьера (op)
-- `/preset save|list|load|delete`
+## Commands
 
-Пресеты хранятся в `config/shooterpresets/`.
+| Command | Description |
+|---------|-------------|
+| `/match ready` | Vote to start |
+| `/match stop` | Stop match (op) |
+| `/match center` | Set zone center (op) |
+| `/match size <start> <end> <seconds>` | Border settings (op) |
+| `/preset save <name>` | Save current inventory as preset |
+| `/preset list` | List presets |
+| `/preset load <name>` | Load preset (lobby only) |
+| `/preset delete <name>` | Delete preset (op) |
+
+## Features (1.1.0)
+
+- `/preset load` outside of match
+- Inventory restored after match
+- Auto end when 1 player left
+- Shuffle animation on title screen
+- Outro: darken + "Игра окончена" then teleport
+- Kill-cam: spectator attaches to killer

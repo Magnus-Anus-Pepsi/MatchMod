@@ -9,7 +9,10 @@ public class MatchModeMod {
     public MatchModeMod() {
         ModLoadingContext.get().registerExtensionPoint(
             IExtensionPoint.DisplayTest.class,
-            () -> new IExtensionPoint.DisplayTest(() -> "OHNOES", (remote, isServer) -> true)
+            () -> new IExtensionPoint.DisplayTest(
+                () -> "OHNOES",
+                (remote, isServer) -> true
+            )
         );
     }
 }
