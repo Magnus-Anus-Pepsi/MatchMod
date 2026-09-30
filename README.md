@@ -1,45 +1,36 @@
-# Match Mode (Forge 1.20.1)
+# Match Mode 1.1.0
 
-Мод для серверов Minecraft 1.20.1 (Forge): режим матча с голосованием за старт, затемнением, наблюдателями, случайными пресетами инвентаря и сжимающимся мировым барьером.
+Forge 1.20.1 server-side mod for match mode with presets, shrinking border, kill-cam.
 
-**Клиентам мод ставить не нужно** — он серверный (server-only).
+## Build
 
-## Требования
-
-- Minecraft 1.20.1
-- Forge 47.x
-- JDK 17 для сборки
-
-## Сборка
+**Requirements:** JDK 17+, ~4 GB RAM
 
 ```bash
+chmod +x gradlew
 ./gradlew build
 ```
 
-Готовый jar: `build/libs/matchmode-1.0.0.jar` — положите в папку `mods` сервера.
+JAR: `build/libs/matchmode-1.1.0.jar` → put in server `mods/`
 
-## Команды
+## Commands
 
-| Команда | Кто | Описание |
-|---------|-----|----------|
-| `/match center` | OP | Центр зоны = твоя позиция |
-| `/match size <старт> <конец> <сек>` | OP | Диаметры барьера и время сжатия |
-| `/match ready` | Все | Голос за старт матча |
-| `/match stop` | OP | Остановить матч |
-| `/preset save <имя>` | Все | Сохранить инвентарь как пресет |
-| `/preset list` | Все | Список пресетов |
-| `/preset delete <имя>` | OP | Удалить пресет |
+| Command | Description |
+|---------|-------------|
+| `/match ready` | Vote to start |
+| `/match stop` | Stop match (op) |
+| `/match center` | Set zone center (op) |
+| `/match size <start> <end> <seconds>` | Border settings (op) |
+| `/preset save <name>` | Save current inventory as preset |
+| `/preset list` | List presets |
+| `/preset load <name>` | Load preset (lobby only) |
+| `/preset delete <name>` | Delete preset (op) |
 
-## Как работает
+## Features (1.1.0)
 
-1. Игроки пишут `/match ready` — когда все готовы, начинается матч.
-2. Затемнение экрана → все становятся наблюдателями на 10 сек.
-3. Случайные пресеты инвентаря от других игроков.
-4. Сжимающийся world border.
-5. После смерти — spectator в месте смерти.
-
-Пресеты хранятся в `config/shooterpresets/` на сервере.
-
-## Лицензия
-
-All Rights Reserved
+- `/preset load` outside of match
+- Inventory restored after match
+- Auto end when 1 player left
+- Shuffle animation on title screen
+- Outro: darken + "Игра окончена" then teleport
+- Kill-cam: spectator attaches to killer
