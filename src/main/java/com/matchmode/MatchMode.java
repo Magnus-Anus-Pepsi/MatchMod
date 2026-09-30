@@ -65,6 +65,8 @@ public class MatchMode {
     static final Map<UUID, ListTag> savedInventories = new HashMap<>();
     static final Map<UUID, UUID> killers = new HashMap<>();
     static final Map<UUID, String> assignedPresets = new HashMap<>();
+    // Players eliminated by lethal damage stay spectators until the round ends.
+    static final Set<UUID> eliminated = new HashSet<>();
 
     static final int DARKEN_TICKS = 40;
     static final int INTRO_TICKS = 240;
@@ -179,6 +181,14 @@ public class MatchMode {
             }
         } else if (state == State.PLAYING) {
             timer++;
+
+            // Keep eliminated players in spectator for the entire round.
+            for (UUID uuid : eliminated) {
+                ServerPlayer p = server.getPlayerList().getPlayer(uuid);
+                if (p != null && p.gameMode.getGameModeForPlayer() != GameType.SPECTATOR) {
+                    p.setGameMode(GameType.SPECTATOR);
+                }
+            }
             if (timer % 20 == 0 && playersAtStart > 1) {
                 long alive = server.getPlayerList().getPlayers().stream()
                     .filter(p -> p.gameMode.getGameModeForPlayer() == GameType.SURVIVAL)
@@ -201,9 +211,10 @@ public class MatchMode {
         Entity entity = e.getEntity();
         if (!(entity instanceof ServerPlayer victim)) return;
 
-        // Do not let vanilla open the death screen. Instead, immediately switch
-        // the player to spectator and show the requested on-screen message.
+        // Any lethal damage source eliminates the player for this round.
+        // Cancel the vanilla death so there is no death screen; spectator is immediate.
         e.setCanceled(true);
+        eliminated.add(victim.getUUID());
 
         deathPos.put(victim.getUUID(), victim.position());
 
@@ -420,6 +431,7 @@ public class MatchMode {
         }
 
         ready.clear();
+        eliminated.clear();
         origins.clear();
         deathPos.clear();
         killers.clear();
