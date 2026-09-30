@@ -1,24 +1,24 @@
 modLoader="javafml"
-loaderVersion="${loader_version_range}"
-license="${mod_license}"
+loaderVersion="[47,)"
+license="All Rights Reserved"
 
 [[mods]]
-modId="${mod_id}"
-version="${mod_version}"
-displayName="${mod_name}"
-authors="${mod_authors}"
+modId="matchmode"
+version="${file.jarVersion}"
+displayName="Match Mode"
+authors="MatchMode"
 displayTest="IGNORE_SERVER_VERSION"
-description='''${mod_description}'''
+description='''Match mode: vote to start, darken, spectators, random presets, shrinking border. Server-side only. Instant spectator on death with "ты 200" title.'''
 
-[[dependencies.${mod_id}]]
+[[dependencies.matchmode]]
     modId="forge"
     mandatory=true
-    versionRange="${forge_version_range}"
+    versionRange="[47,)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.${mod_id}]]
+[[dependencies.matchmode]]
     modId="minecraft"
     mandatory=true
-    versionRange="${minecraft_version_range}"
+    versionRange="[1.20.1,1.21)"
     ordering="NONE"
     side="BOTH"
