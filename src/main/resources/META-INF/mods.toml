@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="matchmode"
+version="1.0.0"
+displayName="Match Mode"
+description='''
+Режим матча: голосование за старт, затемнение, наблюдатели, случайные пресеты от других игроков и сжимающийся барьер.
+Работает только на сервере, клиентам мод ставить не нужно.
+'''
+
+[[dependencies.matchmode]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.matchmode]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"
